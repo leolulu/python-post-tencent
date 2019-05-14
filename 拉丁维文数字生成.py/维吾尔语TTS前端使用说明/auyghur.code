@@ -1,0 +1,97 @@
+#Copyright Xinjiang University (Mijit Ablimit)
+#LICENCE: Apache 2.0
+# http://www.doc88.com/p-2344567486382.html
+# this file is the replacement code map file can be modified and expended. The format is the code representative with basic ASCII codes and their ID numbers. the left side or the target char must not be duplicated, but can be a double character representation. The existing data should only be modified without changing the format of the code lines. If the rightest column is missed, the left column is loaded as the default code.
+
+# below is the vowels , there are 8 vowels.
+1575=1=a
+1749=2=A
+1744=3=e
+1609=4=i
+1608=5=o
+1734=6=O
+1735=7=u
+1736=8=U
+
+# below is the amza, actually used as a syllable separator.
+1574=33=v
+
+# below is the surd consonents.
+1739=9=w
+1585=10=r
+1610=11=y
+1709=12=N
+1726=13=h
+1583=14=d
+1688=15=J
+1711=16=g
+1580=17=j
+1604=18=l
+1586=19=z
+1594=20=G
+1576=21=b
+1606=22=n
+1605=23=m
+
+# below is the non-surd consonents.
+1670=24=c
+1578=25=t
+1662=26=p
+1587=27=s
+1601=28=f
+1582=29=H
+1602=30=q
+1603=31=k
+1588=32=x
+
+
+# above are phoneme representations.
+# below is the punctuation marks, there are wild duplications on the right side...
+1600=34=-
+1548=35=,
+36=.
+1567=37=?
+38=!
+1563=39=;
+40=:
+41="
+8212=42=_
+
+
+#     '=43 this code seems to be forbidden...
+45=~
+46='
+47=+
+48=[
+49=]
+50={
+51=}
+52=(
+53=)
+1642=54=%
+55=$
+56=&
+57=@
+58=^
+59=*
+60=`
+61=/
+62=\
+
+
+# and the numbers
+65=0
+66=1
+67=2
+68=3
+69=4
+70=5
+71=6
+72=7
+73=8
+74=9
+
+#  above are the acii character within 127, mapped with other wild codes.
+
+
+EOF
