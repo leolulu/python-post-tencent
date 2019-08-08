@@ -11,6 +11,7 @@ import time
 import hashlib
 import base64
 import re
+import os
 #  合成webapi接口地址
 URL = "http://api.xfyun.cn/v1/service/v1/tts"
 #  音频编码(raw合成的音频格式pcm、wav,lame合成的音频格式MP3)
@@ -20,6 +21,18 @@ APPID = "5c8bb395"
 #  接口密钥（webapi类型应用开通合成服务后，控制台--我的应用---语音合成---相应服务的apikey）
 API_KEY = "e15bb8e1fbed5b15018f738428694e46"
 
+
+def text_byte_num_cut(text, byte_limit):
+    split_text_list = []
+    single_text = ''
+    for char_ in text:
+        if len((single_text+char_).encode('utf-8')) >= byte_limit:
+            split_text_list.append(single_text)
+            single_text = ''
+        single_text += char_
+    split_text_list.append(single_text)
+    return split_text_list
+
 # 组装http请求头
 
 
@@ -27,16 +40,16 @@ def getHeader():
     curTime = str(int(time.time()))
     # ttp=ssml
     param = "{\"aue\":\"" + AUE + "\",\"auf\":\"audio/L16;rate=16000\",\"voice_name\":\"x_xiaoyan\",\"engine_type\":\"intp65\"}"
-    print("param:{}".format(param))
+    # print("param:{}".format(param))
 
     paramBase64 = str(base64.b64encode(param.encode('utf-8')), 'utf-8')
-    print("x_param:{}".format(paramBase64))
+    # print("x_param:{}".format(paramBase64))
 
     m2 = hashlib.md5()
     m2.update((API_KEY + curTime + paramBase64).encode('utf-8'))
 
     checkSum = m2.hexdigest()
-    print('checkSum:{}'.format(checkSum))
+    # print('checkSum:{}'.format(checkSum))
 
     header = {
         'X-CurTime': curTime,
@@ -46,7 +59,7 @@ def getHeader():
         'X-Real-Ip': '127.0.0.1',
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     }
-    print(header)
+    # print(header)
     return header
 
 
@@ -61,14 +74,21 @@ def writeFile(file, content):
     f.close()
 
 
+txt_file_path = r"E:\裏\图\OneDrive - Office.Inc\附件\精要主义-_如何应对拥挤不堪的工作与生活__.txt"
 #  待合成文本内容
-with open(r"E:\裏\图\OneDrive - Office.Inc\附件\精要主义-_如何应对拥挤不堪的工作与生活__.txt", 'r', encoding='utf-8') as f:
+with open(txt_file_path, 'r', encoding='utf-8') as f:
     text = f.read().replace('\n', "")
 print(len(text))
-text_length = 333
-text_list = re.findall(r".{%d}" % text_length, text)
-text_list.append(text[len(text_list) * text_length:])
+# text_length = 333
+# text_list = re.findall(r".{%d}" % text_length, text)
+# text_list.append(text[len(text_list) * text_length:])
+text_list = text_byte_num_cut(text, 998)
 print(len(text_list))
+try:
+    folder_path = os.path.join(r"E:\python\python-post-tencent\讯飞AI\audio", os.path.splitext(os.path.basename(txt_file_path))[0])
+    os.makedirs(folder_path)
+except:
+    pass
 
 for i, every_text in enumerate(text_list):
     r = requests.post(URL, headers=getHeader(), data=getBody(every_text))
@@ -78,11 +98,12 @@ for i, every_text in enumerate(text_list):
         sid = r.headers['sid']
         if AUE == "raw":
             #   合成音频格式为pcm、wav并保存在audio目录下
-            writeFile("audio/" + str(i) + ".wav", r.content)
+            writeFile(os.path.join(folder_path, '{}.wav'.format(i)), r.content)
+            # writeFile( + str(i) + ".wav", r.content)
         else:
             #   合成音频格式为mp3并保存在audio目录下
             writeFile("audio/" + "xiaoyan" + ".mp3", r.content)
         print("success, sid = " + sid)
     else:
         #   错误码链接：https://www.xfyun.cn/document/error-code （code返回错误码时必看）
-        print(r.text)
+        print(i, r.text)
