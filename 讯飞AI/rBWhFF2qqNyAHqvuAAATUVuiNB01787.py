@@ -104,6 +104,9 @@ def run_tts(Text, serial_no, input_file_path):
     audio_name_prefix = os.path.basename(os.path.dirname(input_file_path))
     audio_output_path = os.path.join(os.path.dirname(input_file_path), audio_name_prefix)
 
+    if os.path.exists(os.path.join(audio_output_path, '{}-{}.wav'.format(audio_name_prefix, serial_no))):
+        return
+
     try:
         os.mkdir(audio_output_path)
     except:
@@ -115,7 +118,7 @@ def run_tts(Text, serial_no, input_file_path):
 
     def on_message(ws, message):
         pcm_path = os.path.join(audio_output_path, '{}-{}.pcm'.format(audio_name_prefix, serial_no))
-        wav_path = os.path.join(audio_output_path, '{}-{}.wav'.format(audio_name_prefix, serial_no))
+        # wav_path = os.path.join(audio_output_path, '{}-{}.wav'.format(audio_name_prefix, serial_no))
         try:
             message = json.loads(message)
             code = message["code"]
