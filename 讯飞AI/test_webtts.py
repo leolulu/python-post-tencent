@@ -19,7 +19,7 @@ AUE = "raw"
 #  应用APPID（必须为webapi类型应用，并开通语音合成服务，参考帖子如何创建一个webapi应用：http://bbs.xfyun.cn/forum.php?mod=viewthread&tid=36481
 APPID = "5c8bb395"
 #  接口密钥（webapi类型应用开通合成服务后，控制台--我的应用---语音合成---相应服务的apikey）
-API_KEY = "e15bb8e1fbed5b15018f738428694e46"
+API_KEY = "9ebe9c5cbb1a67bb2ab0608640078d83"
 
 
 def text_byte_num_cut(text, byte_limit):
@@ -39,7 +39,7 @@ def text_byte_num_cut(text, byte_limit):
 def getHeader():
     curTime = str(int(time.time()))
     # ttp=ssml
-    param = "{\"aue\":\"" + AUE + "\",\"auf\":\"audio/L16;rate=16000\",\"voice_name\":\"x_xiaoyan\",\"engine_type\":\"intp65\"}"
+    param = "{\"aue\":\"" + AUE + "\",\"auf\":\"audio/L16;rate=16000\",\"voice_name\":\"xiaoyan\",\"engine_type\":\"intp65\"}"
     # print("param:{}".format(param))
 
     paramBase64 = str(base64.b64encode(param.encode('utf-8')), 'utf-8')
@@ -74,16 +74,16 @@ def writeFile(file, content):
     f.close()
 
 
-txt_file_path = r"E:\裏\图\OneDrive - Office.Inc\附件\精要主义-_如何应对拥挤不堪的工作与生活__.txt"
+txt_file_path = r"E:\python\python-post-tencent\PDF\吴仁华：天安门血腥清场内幕\ocr_result.txt"
 #  待合成文本内容
 with open(txt_file_path, 'r', encoding='utf-8') as f:
     text = f.read().replace('\n', "")
-print(len(text))
+print('总字数：',len(text))
 # text_length = 333
 # text_list = re.findall(r".{%d}" % text_length, text)
 # text_list.append(text[len(text_list) * text_length:])
 text_list = text_byte_num_cut(text, 998)
-print(len(text_list))
+print('分段数：',len(text_list))
 try:
     folder_path = os.path.join(r"E:\python\python-post-tencent\讯飞AI\audio", os.path.splitext(os.path.basename(txt_file_path))[0])
     os.makedirs(folder_path)
@@ -103,7 +103,7 @@ for i, every_text in enumerate(text_list):
         else:
             #   合成音频格式为mp3并保存在audio目录下
             writeFile("audio/" + "xiaoyan" + ".mp3", r.content)
-        print("success, sid = " + sid)
+        print(i,"success, sid = " + sid)
     else:
         #   错误码链接：https://www.xfyun.cn/document/error-code （code返回错误码时必看）
         print(i, r.text)
