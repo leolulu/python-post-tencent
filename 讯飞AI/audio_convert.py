@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 from concurrent.futures import ProcessPoolExecutor
+import shutil
 
 
 def pcm2wav(pcm_path):
@@ -16,7 +17,7 @@ def pcm2wav(pcm_path):
 
 def wav2mp3(wav_path):
     mp3_path = os.path.splitext(wav_path)[0]+'.mp3'
-    subprocess.call(f'ffmpeg -i {wav_path} {mp3_path}', shell=True)
+    subprocess.call(f'ffmpeg -i "{wav_path}" "{mp3_path}"', shell=True)
 
 
 def wav2mp3_whole_folder_convert(wav_folder_path):
@@ -24,7 +25,19 @@ def wav2mp3_whole_folder_convert(wav_folder_path):
     with ProcessPoolExecutor(4) as exe:
         for wav_file_path in wav_file_path_list:
             exe.submit(wav2mp3, wav_file_path)
+    return wav_file_path_list
+
+
+def wav2mp3_whole_folder_convert_with_file_move(wav_folder_path):
+    wav_file_path_list = wav2mp3_whole_folder_convert(wav_folder_path)
+    txt_file_path_list = [os.path.join(wav_folder_path, i) for i in os.listdir(wav_folder_path) if os.path.splitext(i)[-1] == '.txt']
+
+    wav_store_folder = os.path.join(wav_folder_path, 'WAV')
+    txt_store_folder = os.path.join(wav_folder_path, 'TXT')
+    [os.mkdir(i) for i in [wav_store_folder, txt_store_folder]]
+    [shutil.move(i, wav_store_folder) for i in wav_file_path_list]
+    [shutil.move(i, txt_store_folder) for i in txt_file_path_list]
 
 
 if __name__ == "__main__":
-    pcm2wav(sys.argv[1])
+    wav2mp3_whole_folder_convert_with_file_move(r'E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\腾讯云数据库挑战赛\【前6章】腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程_audio')

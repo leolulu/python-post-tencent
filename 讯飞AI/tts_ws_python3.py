@@ -102,7 +102,7 @@ def text_byte_num_cut(text, byte_limit):
 
 def run_tts(Text, serial_no, input_file_path):
     audio_name_prefix = os.path.basename(os.path.dirname(input_file_path))
-    audio_output_path = os.path.join(os.path.dirname(input_file_path), audio_name_prefix)
+    audio_output_path = os.path.join(os.path.dirname(input_file_path), '{}_audio'.format(audio_name_prefix))
 
     if os.path.exists(os.path.join(audio_output_path, '{}-{}.wav'.format(audio_name_prefix, serial_no))):
         return
@@ -174,7 +174,7 @@ def run_tts(Text, serial_no, input_file_path):
 
 
 if __name__ == "__main__":
-    txt_file_path = r"E:\python\python-post-tencent\PDF\精要主义\精要主义-_如何应对拥挤不堪的工作与生活__.txt"
+    txt_file_path = r"E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\腾讯云数据库挑战赛\【前6章】腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程_image_ocr_result.txt"
     #  待合成文本内容
     with open(txt_file_path, 'r', encoding='utf-8') as f:
         text = f.read().replace('\n', "")
@@ -182,5 +182,5 @@ if __name__ == "__main__":
     text_list = text_byte_num_cut(text, 7998)
     print('分段数：', len(text_list))
 
-    for i, text in enumerate(tqdm(text_list)):
+    for i, text in enumerate(tqdm(text_list), start=1):
         run_tts(text, i, txt_file_path)
