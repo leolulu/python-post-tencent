@@ -74,7 +74,7 @@ def writeFile(file, content):
     f.close()
 
 
-txt_file_path = r"E:\python\python-post-tencent\PDF\吴仁华：天安门血腥清场内幕\ocr_result.txt"
+txt_file_path = r"E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\贫穷的本质\《贫穷的本质：我们为什么摆脱不了贫穷》_image_ocr_result.txt"
 #  待合成文本内容
 with open(txt_file_path, 'r', encoding='utf-8') as f:
     text = f.read().replace('\n', "")

@@ -26,4 +26,4 @@ def ocr_high_precision(folder_path):
 
 
 if __name__ == "__main__":
-    ocr_high_precision(r'E:\裏\图\OneDrive - Office.Inc\腾讯云数据库挑战赛\【前6章】腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程_image')
+    ocr_high_precision(r'E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\贫穷的本质\《贫穷的本质：我们为什么摆脱不了贫穷》_image')

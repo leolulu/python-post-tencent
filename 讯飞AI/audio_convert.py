@@ -40,4 +40,4 @@ def wav2mp3_whole_folder_convert_with_file_move(wav_folder_path):
 
 
 if __name__ == "__main__":
-    wav2mp3_whole_folder_convert_with_file_move(r'E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\腾讯云数据库挑战赛\【前6章】腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程_audio')
+    wav2mp3_whole_folder_convert_with_file_move(r'E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\贫穷的本质\贫穷的本质_audio')

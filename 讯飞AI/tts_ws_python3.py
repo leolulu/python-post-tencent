@@ -174,7 +174,7 @@ def run_tts(Text, serial_no, input_file_path):
 
 
 if __name__ == "__main__":
-    txt_file_path = r"E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\腾讯云数据库挑战赛\【前6章】腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程\第一章-MySQL数据类型-腾讯云数据库MySQL超速入门进阶课程_image_ocr_result.txt"
+    txt_file_path = r"E:\裏\图\OneDrive - Office.Inc\多模态处理文件夹\贫穷的本质\《贫穷的本质：我们为什么摆脱不了贫穷》_image_ocr_result.txt"
     #  待合成文本内容
     with open(txt_file_path, 'r', encoding='utf-8') as f:
         text = f.read().replace('\n', "")
