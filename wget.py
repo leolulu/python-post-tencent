@@ -17,7 +17,7 @@ def download(url_txt_path, use_proxies, download_folder_path, url, proxies, head
             f.write(url + '\t下载失败' + '\n')
         return
     content = response.content
-    with open(os.path.join(download_folder_path, url.split('/')[-1]), 'wb') as f:
+    with open(os.path.join(download_folder_path, response.url.split('/')[-1]), 'wb') as f:
         f.write(content)
 
 
