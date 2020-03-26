@@ -36,7 +36,10 @@ def wget(url_txt_path, use_proxies='0', download_folder_path=None):
         url_list = f.read().split('\n')
 
     for url in tqdm(url_list):
-        download(url_txt_path, use_proxies, download_folder_path, url, proxies, headers)
+        try:
+            download(url_txt_path, use_proxies, download_folder_path, url, proxies, headers)
+        except Exception as e:
+            print(e)
 
 
 if __name__ == "__main__":
